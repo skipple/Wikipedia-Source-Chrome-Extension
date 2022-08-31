@@ -13,8 +13,8 @@ Future Enhancements:
 # Website Status:
 
 ## COMPLETE:
-    Wikipedia:Reliable sources/Perennial sources:
-        https://en.wikipedia.org/wiki/Wikipedia:Reliable_sources/Perennial_sources
+- Wikipedia:Reliable sources/Perennial sources:
+    - https://en.wikipedia.org/wiki/Wikipedia:Reliable_sources/Perennial_sources
 
 
 ## COMPLETE:
