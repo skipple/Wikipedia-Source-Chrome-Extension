@@ -2975,6 +2975,22 @@
       "source": "WP:RS/PS",
       "summary": "Due to persistent abuse, ZoomInfo is currently on the Wikipedia spam blacklist, and links must be whitelisted before they can be used.",
       "updated": 2020
+    },
+    "fakenews":{
+      "name": "Various",
+      "status": 4,
+      "status-long": "Fake news",
+      "source": "wiki/List of fake news websites",
+      "summary": "This domain appears on a list of fake news websites.",
+      "updated": 2022
+    },
+    "satire":{
+      "name": "Various",
+      "status": 4,
+      "status-long": "Satirical",
+      "source": "wiki/List of satirical news websites",
+      "summary": "This domain appears on a list of satirical websites.",
+      "updated": 2022
     }
   }
 }

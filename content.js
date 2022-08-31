@@ -5,7 +5,6 @@ let search_results = getSearchResults();
 function getSearchResults(){
     allLinks = document.body.querySelectorAll("div.TbwUpd cite.iUh30");
     if (allLinks.length != 0){
-        console.log(allLinks[0].innerText);
         checkAllResults(allLinks);
     }
     else{
@@ -22,22 +21,30 @@ async function checkAllResults(results_list){
     //for each search result, check against the list of sources
     //if source exists, add the icon
     for (i=0; i < results_list.length; i+=2){
-        link = results_list[i];
+        short_domain = trimHeader(results_list[i]);
         //remove http and www
-        domain = link.innerText.split(" ")[0];
-        short_domain = domain.split("//")[1];
-        if (short_domain.substring(0,4) === 'www.'){
-            short_domain = short_domain.substring(4,short_domain.length);
-        }
         //check if the domain is on the list of domains from wiki, if so, add an icon.
         if (sourceListID.sources[short_domain] != undefined){
             sourceID = sourceListID.sources[short_domain];
             console.log('adding source id:', sourceID);
-            addIcon(link, sourceID);
+            addIcon(results_list[i], sourceID);
+        }
+        //if source does not exist, check if there is a subdomain on the url.
+        //if there is, trim it and re-check.
+        else{
+            sub_domain_check = short_domain.split(".");
+            if(sub_domain_check.length>2){
+                sub_domain_trimmed = trimSubdomain(short_domain);
+                console.log("Subdomain check:",sub_domain_trimmed);
+                if (sourceListID.sources[sub_domain_trimmed] != undefined){
+                    sourceID = sourceListID.sources[sub_domain_trimmed];
+                    console.log('adding source id:', sourceID);
+                    addIcon(results_list[i], sourceID);
+                }
+            } 
         }
     }      
 }
-
 
 async function checkNewsResults(results_list){
     //get the list of sources that are available from json
@@ -45,20 +52,50 @@ async function checkNewsResults(results_list){
     //for each search result, check against the list of sources
     //if source exists, add the icon
     for (i=0; i < results_list.length;i++){
-        link = results_list[i];
-        //remove http and www
-        domain = link.origin.split(" ")[0];
-        short_domain = domain.split("//")[1];
-        if (short_domain.substring(0,4) === 'www.'){
-            short_domain = short_domain.substring(4,short_domain.length);
-        };
+        short_domain = trimHeaderNews(results_list[i]);
         //check if the domain is on the list of domains from wiki, if so, add an icon.
         if (sourceListID.sources[short_domain] != undefined){
             sourceID = sourceListID.sources[short_domain];
             console.log('adding source id:', sourceID);
-            addIcon(link, sourceID);
+            addIcon(results_list[i], sourceID);
+        }
+        else{
+            sub_domain_check = short_domain.split(".");
+            if(sub_domain_check.length>2){
+                sub_domain_trimmed = trimSubdomain(short_domain);
+                console.log("Subdomain check:",sub_domain_trimmed);
+                if (sourceListID.sources[sub_domain_trimmed] != undefined){
+                    sourceID = sourceListID.sources[sub_domain_trimmed];
+                    console.log('adding source id:', sourceID);
+                    addIcon(results_list[i], sourceID);
+                }
+            } 
         }
     }
+}
+
+function trimHeader(link){
+    domain = link.innerText.split(" ")[0];
+    short_domain = domain.split("//")[1];
+    if (short_domain.substring(0,4) === 'www.'){
+        short_domain = short_domain.substring(4,short_domain.length);
+    }
+    return short_domain;
+}
+
+function trimHeaderNews(link){
+    domain = link.origin.split(" ")[0];
+    short_domain = domain.split("//")[1];
+    if (short_domain.substring(0,4) === 'www.'){
+        short_domain = short_domain.substring(4,short_domain.length);
+    }
+    return short_domain;
+}
+
+function trimSubdomain(link){
+    index_end_of_subdomain = link.indexOf(".") + 1;
+    sub_domain_trimmed = link.slice(index_end_of_subdomain);
+    return sub_domain_trimmed;
 }
 
 async function addIcon(link_location, site_id){

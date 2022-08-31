@@ -16,12 +16,6 @@ Future Enhancements:
 - Wikipedia:Reliable sources/Perennial sources:
     - https://en.wikipedia.org/wiki/Wikipedia:Reliable_sources/Perennial_sources
 
-
-## COMPLETE:
-- Wikipedia:Reliable sources/Perennial sources:
-    - https://en.wikipedia.org/wiki/Wikipedia:Reliable_sources/Perennial_sources
-
-
 ## INCOMPLETE:
 - List of fake news websites:
     - https://en.wikipedia.org/wiki/List_of_fake_news_websites
