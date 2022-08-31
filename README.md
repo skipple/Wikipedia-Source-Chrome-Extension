@@ -3,7 +3,6 @@ An extention for chrome that adds an icon to google search results based on the 
 
 Known Issues:
 - Currently, icons are in the incorrect location on the 'News' tab for google search results.
-- Webresults with a sub-domain (ie. en.wikipedia.org) will not trigger an icon. Need to add wildcard logic for catching for sub-domains.
 
 Future Enhancements: 
 - Addition of other reliable site sources other than just WP:RS/PS.
